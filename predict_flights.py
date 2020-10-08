@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 np.random.seed(2019)
 torch.random.manual_seed(2019)
 
+#只读取第2列的数值数据
 data = pd.read_csv('./flights.csv', usecols=[2])
 plt.plot(data)
 plt.show()
@@ -22,6 +23,7 @@ min_value = min(dataset)
 scalar = max_value - min_value
 dataset = list(map(lambda x: (x-min_value) / scalar, dataset))
 
+#以前两天的数据预测下一天的数据
 def create_dataset(dataset, look_back = 2):
     dataX, dataY = [], []
     for i in range(len(dataset) - look_back):
@@ -43,6 +45,7 @@ train_X = train_X.reshape(-1, 1, 2)
 train_Y = train_Y.reshape(-1, 1, 1)
 test_X = test_X.reshape(-1, 1, 2)
 
+#转化为张量数据
 train_X = torch.from_numpy(train_X)
 train_Y = torch.from_numpy(train_Y)
 test_X = torch.from_numpy(test_X)
